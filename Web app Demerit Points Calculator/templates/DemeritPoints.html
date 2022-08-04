@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% set active_page = 'home' %}
+
+{% block head %}
+<title>{{title}}</title>
+{% endblock head %}
+
+{% block body %}
+
+<script>
+function ResetNames()
+{
+    document.getElementById("full_name").value = "";
+    document.getElementById("driving_speed").value = "";
+	document.getElementById("speed_limit").value = "";
+	document.getElementById("towing_box").checked = false;
+	document.getElementById("school_box").checked = false;
+	document.getElementById("holiday_box").checked = false;
+	document.getElementById("flash_msgs").style.display='none';
+}
+</script>
+
+
+<div class="container mt-5 pt-2" style="max-width:800px">
+
+    <h1>Demerit points calculator</h1>
+    
+    <form action="{{ url_for('home') }}" method="POST">
+        <div class="form-row ">
+            <div class="form-group col-md-4">
+                <label for="first_name"><strong>Driver name</strong></label>
+                <input type="text" class="form-control" id="full_name" name="full_name"
+                    {% if full_name is defined %}value="{{full_name}}" {% endif %}>
+            </div>
+		</div>
+		
+        <div class="form-row">
+			<div class="form-group col-md-3">
+                <label for="FirstNumber"><strong>Driving speed</strong></label>
+				<input type="text" class="form-control" id="driving_speed" name="driving_speed"
+                    {% if driving_speed is defined %}value="{{driving_speed}}" {% endif %}>
+            </div>
+            
+			<div class="form-group col-md-3">
+                <label for="age"><strong>Speed limit</strong></label>
+				<input type="text" class="form-control" id="speed_limit" name="speed_limit"
+                    {% if speed_limit is defined %}value="{{speed_limit}}" {% endif %}>
+            </div>
+        </div>
+		
+		<div class="form-row ">
+			<div class="checkbox col-md-3">
+                <label for="Tick1"><strong>Towing trailer</strong></label>
+                <input type="checkbox" id="towing_box" name="towing_box"
+					{% if towing_box=="on"%}checked{% endif %}>
+
+            </div>
+			
+			<div class="checkbox col-md-3">
+                <label for="Tick2"><strong>School zone</strong></label>
+                <input type="checkbox" id="school_box" name="school_box"
+					{% if school_box=="on"%}checked{% endif %}>
+            </div>
+			
+			<div class="checkbox col-md-3">
+                <label for="Tick3"><strong>Holiday period</strong></label>
+                <input type="checkbox" id="holiday_box" name="holiday_box"
+					{% if holiday_box=="on"%}checked{% endif %}>
+            </div>	
+		</div>
+		
+        <div class="form-row">
+            <div class="form-group col-4">
+                <button type="submit" class="btn btn-outline-primary btn-block btn-lg">Calculate points</button>
+            </div>
+			
+            <div class="form-group col-4">
+ 				<input type="button" value="Reset" class="btn btn-outline-danger btn-block btn-lg" onclick="ResetNames();"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock body %}
+
+{% block scripts %}
+{% endblock scripts %}

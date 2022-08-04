@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block head %}
+<title>Page not found</title>
+
+{% endblock head %}
+
+{% block body %} 
+  
+  <h1>Oops! Looks like you are lost.</h1> 
+  <!-- <a href="{{ url_for('home') }}"><p>Click here to go to the home page.</a></p> -->
+  <a>Automatically redirecting to the home page in 5...4...3...2...1...</a>
+  
+  <script> 
+    var delay = 5000; 
+    setTimeout(function(){
+	  window.location.replace("{{ url_for('home') }}");
+      }, delay);
+  </script> 
+  
+{% endblock %} 
